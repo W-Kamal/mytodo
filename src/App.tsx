@@ -1,32 +1,32 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
 import './App.css'
+import React, { useState } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
+import { item } from '../Types'
+
+
+/** TODO List
+ * Requirements : manipulate items / Type checking TS
+ * Features Required : add item / edit item / remove item / validate item / fetch items list / data persistance
+ * Global state ?
+ * Persistance ?
+ * Zustand/Recoil/Redux OR useContext()+useReducer()
+ * Components : item as input field with checkbox to validate
+*/
+
+// NEED TYPING
+// const CustomMsg = () => {return};
+
+const App: React.FC = () => {
+  const [itemsList, setItemsList] = useState([])
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {(itemsList) &&
+        itemsList.map((item) => (
+          console.log(`test : `)
+          // NEED TYPING
+          //<TodoItem></TodoItem>
+        ))}
     </div>
   )
 }
