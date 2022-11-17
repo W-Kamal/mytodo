@@ -1,7 +1,6 @@
 import './App.css'
-import React, { useState } from 'react'
-
-import { item } from '../Types'
+import React, { StrictMode, useState } from 'react'
+import Main from './components/Main'
 
 
 /** TODO List
@@ -16,18 +15,13 @@ import { item } from '../Types'
 // NEED TYPING
 // const CustomMsg = () => {return};
 
-const App: React.FC = () => {
-  const [itemsList, setItemsList] = useState([])
-
+const App = () => {
   return (
-    <div className="App">
-      {(itemsList) &&
-        itemsList.map((item) => (
-          console.log(`test : `)
-          // NEED TYPING
-          //<TodoItem></TodoItem>
-        ))}
-    </div>
+    <StrictMode>
+      <div className="App">
+        <Main />
+      </div>
+    </StrictMode>
   )
 }
 
