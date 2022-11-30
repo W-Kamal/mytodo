@@ -1,8 +1,9 @@
 import './App.css'
-import React, { StrictMode, useState, MouseEventHandler, FormEvent, Dispatch, SetStateAction } from 'react'
+import React, { StrictMode, useState } from 'react'
+import InputField from './components/InputField'
+import todos from "./assets/data.js" // todos est un json : tableau d'objet contenant x items
+import TodoItem from './components/TodoItem'
 
-import InputField, { Item } from './components/InputField'
-import { todos } from "./assets/data.json" // todos est un json : tableau d'objet contenant x items
 
 /** TODO List
  * Requirements : manipulate items / Type checking TS
@@ -13,15 +14,21 @@ import { todos } from "./assets/data.json" // todos est un json : tableau d'obje
  * Components : item as input field with checkbox to validate
 */
 
-
-
-
-// NEED TYPING
-// const CustomMsg = () => {return};
+export type TodoProps = {
+  id: number;
+  label: string;
+  created_at: string;
+  edited_at: string;
+  status: string;
+  validated: boolean;
+}
 
 const App: React.FC = () => {
   const [todo, setTodo] = useState<string>("")
+  const [todoList, setTodoList] = useState<TodoProps[]>(todos)
   console.log(`todo : `, todo)
+  console.log(`todos : `, todos)
+
   return (
     <StrictMode>
       <div className="App">
@@ -29,11 +36,11 @@ const App: React.FC = () => {
         <InputField todo={todo} setTodo={setTodo} />
 
         <ul>
-          {/* {(todos) &&
-          todos.map((item) => (
-            // <TodoItem props={item}/>
-            <p>{item.label}</p>
-          ))} */}
+          {(todoList) &&
+            todoList.map((todo) => (
+              <TodoItem props={todo} setTodo={setTodoList}/>
+
+            ))}
         </ul>
 
       </div>
