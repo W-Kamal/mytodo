@@ -1,8 +1,13 @@
 import './App.css'
-import React, { StrictMode, useState } from 'react'
+import { StrictMode, useState, FC, FormEvent } from 'react'
+
+import todosList from "./assets/data.js" // json : tableau d'objets contenant x items
+import { Todo } from './models/TodoModel'
+// import { createItem } from "./services/services"
+
 import InputField from './components/InputField'
-import todos from "./assets/data.js" // todos est un json : tableau d'objet contenant x items
-import TodoItem from './components/TodoItem'
+import TodoItem from './components/Item'
+import { nanoid } from 'nanoid'
 
 
 /** TODO List
@@ -14,35 +19,37 @@ import TodoItem from './components/TodoItem'
  * Components : item as input field with checkbox to validate
 */
 
-export type TodoProps = {
-  id: number;
-  label: string;
-  created_at: string;
-  edited_at: string;
-  status: string;
-  validated: boolean;
-}
 
-const App: React.FC = () => {
+const App: FC = () => {
   const [todo, setTodo] = useState<string>("")
-  const [todoList, setTodoList] = useState<TodoProps[]>(todos)
+  const [todoList, setTodoList] = useState<Todo[]>([])
   console.log(`todo : `, todo)
-  console.log(`todos : `, todos)
 
+  const createItem = (e: FormEvent) => {
+    e.preventDefault();
+    if (!todo) {
+      return;
+    } else {
+      setTodoList([...todoList, { id: nanoid(4), label: todo, created_at: new Date(), edited_at: "", status: "pending", validated: false }])
+      setTodo("")
+    }
+  }
+  console.log(`todo liste : `, todoList)
   return (
     <StrictMode>
       <div className="App">
         <h1>ToDo List</h1>
-        <InputField todo={todo} setTodo={setTodo} />
+        <InputField todo={todo} setTodo={setTodo} handleAdd={createItem} />
 
         <ul>
-          {(todoList) &&
-            todoList.map((todo) => (
-              <TodoItem props={todo} setTodo={setTodoList}/>
+          {/* {(todoList) &&
+            todoList.map((item) => (
+              <li key={item.id}>
+                <TodoItem props={item} setTodo={setTodoList}/>
+              </li>
 
-            ))}
+            ))} */}
         </ul>
-
       </div>
     </StrictMode>
   )

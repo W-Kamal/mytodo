@@ -1,4 +1,4 @@
-const todos = [
+const todosList = [
   {
     "id": 1,
     "label": "Faire la vaisselle",
@@ -33,4 +33,4 @@ const todos = [
   }
 ]
 
-export default todos;
+export default todosList;

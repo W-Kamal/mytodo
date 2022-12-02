@@ -1,13 +1,16 @@
-import React, { FormEvent, Dispatch, SetStateAction } from "react";
-import { MdAdd, MdLoop } from "react-icons/md"
-import { handleAdd } from "../utilities/utils"
+import { SetStateAction, Dispatch, FC, FormEvent } from "react";
+import { MdAdd, MdLoop } from "react-icons/md";
+
+import { createItem } from "../services/services";
+import { TodoAction } from '../models/TodoModel';
 
 export interface Props {
   todo: string;
-  setTodo: React.Dispatch<SetStateAction<string>>;
+  setTodo: Dispatch<SetStateAction<string>>;
+  handleAdd: (e:FormEvent) => void;
 }
 
-const InputItem = ({ todo, setTodo }: Props): JSX.Element => {
+const InputField: FC<Props> = ({ todo, setTodo, handleAdd }): JSX.Element => {
   return (
     <form onSubmit={handleAdd}>
       <input
@@ -22,4 +25,4 @@ const InputItem = ({ todo, setTodo }: Props): JSX.Element => {
   )
 }
 
-export default InputItem
+export default InputField
